@@ -27,25 +27,18 @@ public class TemplateInfo : ReadOnlyBase<TemplateInfo>
         private set => LoadProperty(DescriptionProperty, value);
     }
     
-    public static readonly PropertyInfo<string> AssemblyProperty = RegisterProperty<string>(nameof(Assembly));
-    public string Assembly
+    public static readonly PropertyInfo<string> ClassNameProperty = RegisterProperty<string>(nameof(ClassName));
+    public string ClassName
     {
-        get => GetProperty(AssemblyProperty);
-        private set => LoadProperty(AssemblyProperty, value);
+        get => GetProperty(ClassNameProperty);
+        private set => LoadProperty(ClassNameProperty, value);
     }
     
-    public static readonly PropertyInfo<DateTime> CreatedAtProperty = RegisterProperty<DateTime>(nameof(CreatedAt));
-    public DateTime CreatedAt
+    public static readonly PropertyInfo<string> MoreInfoProperty = RegisterProperty<string>(nameof(MoreInfo));
+    public string MoreInfo
     {
-        get => GetProperty(CreatedAtProperty);
-        private set => LoadProperty(CreatedAtProperty, value);
-    }
-    
-    public static readonly PropertyInfo<DateTime> UpdatedAtProperty = RegisterProperty<DateTime>(nameof(UpdatedAt));
-    public DateTime UpdatedAt
-    {
-        get => GetProperty(UpdatedAtProperty);
-        private set => LoadProperty(UpdatedAtProperty, value);
+        get => GetProperty(MoreInfoProperty);
+        private set => LoadProperty(MoreInfoProperty, value);
     }
     
     [FetchChild]
@@ -54,8 +47,7 @@ public class TemplateInfo : ReadOnlyBase<TemplateInfo>
         Id = data.Id;
         Title = data.Title;
         Description = data.Description;
-        Assembly = data.Assembly;
-        CreatedAt = data.CreatedAt;
-        UpdatedAt = data.UpdatedAt;
-    }    
+        ClassName = data.ClassName;
+        MoreInfo = data.MoreInfo;
+    }
 }

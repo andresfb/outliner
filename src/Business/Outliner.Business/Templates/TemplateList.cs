@@ -1,4 +1,5 @@
 using Csla;
+using Outliner.Dal;
 using Outliner.Dal.Templates;
 
 namespace Outliner.Business.Templates;
@@ -7,7 +8,7 @@ namespace Outliner.Business.Templates;
 public class TemplateList : ReadOnlyListBase<TemplateList, TemplateInfo>
 {
     [Fetch]
-    private void Fetch([Inject]ITemplateDal dal, [Inject]IChildDataPortal<TemplateInfo> templateInfoPortal)
+    private void Fetch([Inject]IBaseDal<TemplateEntity> dal, [Inject]IChildDataPortal<TemplateInfo> templateInfoPortal)
     {
         using (LoadListMode)
         {

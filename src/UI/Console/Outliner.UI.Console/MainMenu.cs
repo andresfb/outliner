@@ -1,29 +1,33 @@
+using Csla;
 using Outliner.UI.CLI.Menus;
 
 namespace Outliner.UI.CLI;
 
 public class MainMenu
 {
+    private readonly IDataPortalFactory _factory;
+    
     private readonly List<MenuItem?> _options;
 
-    public MainMenu()
+    public MainMenu(IDataPortalFactory factory)
     {
+        _factory = factory;
+        
         var option = 1;
-
         _options = new List<MenuItem?>
         {
             new MenuItem
             {
                 Option = option++,
                 Assembly = typeof(Menus.ListTemplates.Menu),
-                Title = "List Available Templates"
+                Title = "List available Templates"
             },
-            // new MenuItem
-            // {
-            //     Option = option++,
-            //     CallNamespace = "Score.Tests.Cli.MailOrder.Business",
-            //     Title = "Create new Templates"
-            // },
+            new MenuItem
+            {
+                Option = option,
+                Assembly = typeof(Menus.AddTemplate.Menu),
+                Title = "Create new Template"
+            },
         };
     }
     
@@ -68,7 +72,7 @@ public class MainMenu
             return false;
         }
         
-        if (Activator.CreateInstance(option.Assembly) is not IMenu menu)
+        if (Activator.CreateInstance(option.Assembly, _factory) is not IMenu menu)
         {
             Console.WriteLine("Invalid Selection");
             return false;

@@ -3,7 +3,7 @@ using Outliner.Dal.Templates;
 
 namespace Outliner.Dal.EF.Templates.Data;
 
-public class TemplateDal : ITemplateDal
+public class TemplateDal : IBaseDal<TemplateEntity>
 {
     private readonly OutlinerDbContext _context;
 
@@ -34,19 +34,20 @@ public class TemplateDal : ITemplateDal
         if (Exists(template.Id)) throw new TemplateExistsException(template.Id);
 
         {
-            var lastId = 0;
+            template.CreatedAt = DateTime.Now;
+            template.UpdatedAt = DateTime.Now;
+            
+            _context.Templates.Add(template);
+            _context.SaveChanges();
+            
             try
             {
-                lastId = _context.Templates.Max(m => m.Id);
+                template.Id = _context.Templates.Max(m => m.Id);
             }
             catch
             {
                 /* ignore exception */
             }
-
-            template.Id = ++lastId;
-            _context.Templates.Add(template);
-            _context.SaveChanges();
         }
         
         return template;
@@ -58,9 +59,9 @@ public class TemplateDal : ITemplateDal
             var old = Get(template.Id);
             old.Title = template.Title;
             old.Description = template.Description;
-            old.Assembly = template.Assembly;
-            old.CreatedAt = template.CreatedAt;
-            old.UpdatedAt = template.UpdatedAt;            
+            old.ClassName = template.ClassName;
+            old.MoreInfo = template.MoreInfo;
+            old.UpdatedAt = DateTime.Now;
             _context.SaveChanges();
             return old;
         }

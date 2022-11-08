@@ -13,6 +13,7 @@ public class Menu : BaseMenu, IMenu
     {
         try
         {
+            Console.WriteLine();
             var list = Factory.GetPortal<TemplateList>().Fetch();
             if (list.Count == 0)
             {
@@ -21,12 +22,17 @@ public class Menu : BaseMenu, IMenu
                 return;
             }
         
-            var table = new ConsoleTable("Id", "Title", "Description");
+            var table = new ConsoleTable("Id", "Title", "Description", "More Info");
             foreach (var template in list)
             {
-                table.AddRow(template.Id, template.Title, template.Description[..50]);
+                var description = template.Description.Length > 100
+                    ? template.Description[..100] 
+                    : template.Description;
+                
+                table.AddRow(template.Id, template.Title, description, template.MoreInfo);
             }
         
+            Console.WriteLine();
             table.Write();
             Console.WriteLine();
         }
