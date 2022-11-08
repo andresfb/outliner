@@ -4,18 +4,18 @@ namespace Outliner.UI.CLI;
 
 public class MainMenu
 {
-    private readonly List<MenuItem?> options;
+    private readonly List<MenuItem?> _options;
 
     public MainMenu()
     {
         var option = 1;
 
-        options = new List<MenuItem?>
+        _options = new List<MenuItem?>
         {
             new MenuItem
             {
                 Option = option++,
-                CallNamespace = typeof(Menus.ListTemplates.Menu),
+                Assembly = typeof(Menus.ListTemplates.Menu),
                 Title = "List Available Templates"
             },
             // new MenuItem
@@ -34,9 +34,9 @@ public class MainMenu
         Console.WriteLine("\nMain Menu");
         Console.WriteLine("----------\n\n");
         Console.WriteLine("Options:\n");
-        foreach (var item in options.Where(item => item != null))
+        foreach (var item in _options.Where(item => item != null))
         {
-            Console.WriteLine($"{item.Option}. {item.Title}");
+            if (item != null) Console.WriteLine($"{item.Option}. {item.Title}");
         }
 
         Console.WriteLine("Q. Exit");
@@ -49,20 +49,26 @@ public class MainMenu
         }
 
         var selection = Convert.ToInt32(value);
-        if (selection == 0 || selection > options.Count)
+        if (selection == 0 || selection > _options.Count)
         {
             Console.WriteLine("Invalid Selection");
             return false;
         }
 
-        var option = options.FirstOrDefault(o => o.Option == selection);
+        var option = _options.FirstOrDefault(o => o != null && o.Option == selection);
         if (option == null)
         {
             Console.WriteLine("Invalid Selection");
             return false;
         }
+
+        if (option.Assembly is null)
+        {
+            Console.WriteLine("Invalid Selection");
+            return false;
+        }
         
-        if (Activator.CreateInstance(option.CallNamespace) is not IMenu menu)
+        if (Activator.CreateInstance(option.Assembly) is not IMenu menu)
         {
             Console.WriteLine("Invalid Selection");
             return false;
