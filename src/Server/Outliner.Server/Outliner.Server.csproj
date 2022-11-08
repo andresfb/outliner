@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Csla" Version="6.2.2" />
+        <PackageReference Include="Csla.AspNetCore" Version="6.2.2" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Controllers" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Business\Outliner.Business\Outliner.Business.csproj" />
+      <ProjectReference Include="..\..\Data\Outliner.Dal.EF\Outliner.Dal.EF.csproj" />
+      <ProjectReference Include="..\..\Data\Outliner.Dal\Outliner.Dal.csproj" />
+      <ProjectReference Include="..\..\Shared\Outliner.Shared\Outliner.Shared.csproj" />
+    </ItemGroup>
+
+</Project>
