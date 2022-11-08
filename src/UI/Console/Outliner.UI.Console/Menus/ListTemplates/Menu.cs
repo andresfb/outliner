@@ -11,21 +11,29 @@ public class Menu : BaseMenu, IMenu
 
     public void ShowMenu()
     {
-        var list = Factory.GetPortal<TemplateList>().Fetch();
-        if (list.Count == 0)
+        try
         {
-            Console.WriteLine("No Templates found");
+            var list = Factory.GetPortal<TemplateList>().Fetch();
+            if (list.Count == 0)
+            {
+                Console.WriteLine("No Templates found");
+                Console.WriteLine();
+                return;
+            }
+        
+            var table = new ConsoleTable("Id", "Title", "Description");
+            foreach (var template in list)
+            {
+                table.AddRow(template.Id, template.Title, template.Description[..50]);
+            }
+        
+            table.Write();
             Console.WriteLine();
-            return;
         }
-        
-        var table = new ConsoleTable("Id", "Title", "Description");
-        foreach (var template in list)
+        finally
         {
-            table.AddRow(template.Id, template.Title, template.Description[..50]);
+            Console.WriteLine("Press enter to continue...");
+            Console.ReadLine();   
         }
-        
-        table.Write();
-        Console.WriteLine();
     }
 }
