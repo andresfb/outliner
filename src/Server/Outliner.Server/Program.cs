@@ -19,7 +19,7 @@ builder.Services.AddCsla(o => o
         .AddServerSideDataPortal()
         .UseLocalProxy()));
 
-builder.Services.AddDalEfCore("");
+// builder.Services.AddDalEfCore("");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
