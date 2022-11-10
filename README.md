@@ -8,9 +8,10 @@ A program that helps creative writers outline their stories using different outl
 3. Microsoft SQL Server 2022
 
 ### Clients
-1. ReactiveUI 18.x (MVVM)
+1. Blazor Webassembly 6.x (Web-based UI)
 2. .NET MAUI 6.x (multi-device UI)
 3. Terminal.Gui 1.8.x (Command Line based UI)
+4. ReactiveUI 18.x (MVVM)
 
 ### Structure Templates
 1. Snowflake Method
