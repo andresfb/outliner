@@ -5,10 +5,10 @@ using Outliner.Dal.Projects;
 namespace Outliner.Business.Projects;
 
 [Serializable]
-public class ProjectList : ReadOnlyListBase<ProjectList, ProjectInfo>
+public abstract class BaseProjectList : ReadOnlyListBase<BaseProjectList, BaseProjectInfo>
 {
     [Fetch]
-    private void Fetch([Inject]IBaseDal<ProjectEntity> dal, [Inject]IChildDataPortal<ProjectInfo> projectInfoPortal)
+    private void Fetch([Inject]IBaseDal<ProjectEntity> dal, [Inject]IChildDataPortal<BaseProjectInfo> projectInfoPortal)
     {
         using (LoadListMode)
         {

@@ -1,13 +1,13 @@
+using System.ComponentModel.DataAnnotations;
 using Csla;
 using Outliner.Dal.Projects;
 
 namespace Outliner.Business.Projects;
 
 [Serializable]
-public class ProjectInfo : ReadOnlyBase<ProjectInfo>
+public abstract class BaseProjectInfo : ReadOnlyBase<BaseProjectInfo>
 {
     public static readonly PropertyInfo<int> IdProperty = RegisterProperty<int>(nameof(Id));
-
     public int Id
     {
         get => GetProperty(IdProperty);
@@ -15,7 +15,6 @@ public class ProjectInfo : ReadOnlyBase<ProjectInfo>
     }
 
     public static readonly PropertyInfo<string> TitleProperty = RegisterProperty<string>(nameof(Title));
-
     public string Title
     {
         get => GetProperty(TitleProperty);
@@ -23,7 +22,6 @@ public class ProjectInfo : ReadOnlyBase<ProjectInfo>
     }
 
     public static readonly PropertyInfo<string> SubTitleProperty = RegisterProperty<string>(nameof(SubTitle));
-
     public string SubTitle
     {
         get => GetProperty(SubTitleProperty);
@@ -31,7 +29,6 @@ public class ProjectInfo : ReadOnlyBase<ProjectInfo>
     }
 
     public static readonly PropertyInfo<string> ThemeProperty = RegisterProperty<string>(nameof(Theme));
-
     public string Theme
     {
         get => GetProperty(ThemeProperty);
@@ -39,7 +36,6 @@ public class ProjectInfo : ReadOnlyBase<ProjectInfo>
     }
     
     public static readonly PropertyInfo<string> GenreProperty = RegisterProperty<string>(nameof(Genre));
-    
     public string Genre
     {
         get => GetProperty(GenreProperty);
@@ -47,7 +43,6 @@ public class ProjectInfo : ReadOnlyBase<ProjectInfo>
     }
 
     public static readonly PropertyInfo<int> WordCountProperty = RegisterProperty<int>(nameof(WordCount));
-
     public int WordCount
     {
         get => GetProperty(WordCountProperty);
@@ -55,7 +50,6 @@ public class ProjectInfo : ReadOnlyBase<ProjectInfo>
     }
 
     public static readonly PropertyInfo<string> TypeProperty = RegisterProperty<string>(nameof(Type));
-
     public string Type
     {
         get => GetProperty(TypeProperty);
